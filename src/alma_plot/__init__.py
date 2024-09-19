@@ -1,5 +1,5 @@
 # Import main functions from plot.py
-from .plot import plot_alma
+from .plot import plot_alma, modify_html
 
 # Import utility functions from utils.py
 from .utils import (
@@ -15,5 +15,6 @@ __all__ = [
     'get_custom_color_palette',
     'create_risk_plot',
     'create_histogram_plot',
-    'create_scatter_plot'
+    'create_scatter_plot',
+    'modify_html'
 ]

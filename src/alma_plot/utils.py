@@ -16,7 +16,8 @@ def get_custom_color_palette():
         '#c7c7c7', '#ff9896', '#637939', '#aec7e8', '#ffbb78', '#98df8a',
         '#7c231e', '#3d6a3d', '#f96502', '#6d3f7d', '#6b4423', '#d956a6'
     ]
-def create_risk_plot(df, source, width, x, threshold, test_sample):
+
+def create_risk_plot(source, width, x, threshold):
     p = figure(title='AML Epigenomic Risk', width=width, height=300,
                tools="xbox_select,reset,save", active_drag='xbox_select',
                x_axis_label=x, y_axis_label="Patient Percentile")
@@ -36,15 +37,6 @@ def create_risk_plot(df, source, width, x, threshold, test_sample):
                        selection_line_color="white")
 
     p.add_tools(HoverTool(renderers=[scatter], mode='vline', tooltips=None))
-
-    if test_sample:
-        vline = Span(location=df.loc[test_sample][x], dimension='height', line_color='black', line_dash='dashed', line_alpha=0.8)
-        p.renderers.extend([vline])
-        p.star(x=df.loc[test_sample][x], y=0, size=15, color="black", alpha=0.9, 
-               legend_label=f'{test_sample}, {df.loc[test_sample]["AML Epigenomic Risk"]} Epigenomic Risk ({df.loc[test_sample][x]:.2f})',
-               line_color="black", line_width=1)
-        p.legend.location = "bottom_right"
-        p.legend.click_policy = "hide"
 
     return p
 
@@ -86,11 +78,11 @@ def create_histogram_plot(df, source, width, x):
 
     return p
 
-def create_scatter_plot(df, source, col, x_range, y_range, xaxis, yaxis, test_sample):
+def create_scatter_plot(df, source, col, x_range, y_range, xaxis, yaxis):
     factors = [str(val) for val in df[col].unique() if pd.notnull(val)]
     color_mapper = CategoricalColorMapper(factors=factors, palette=get_custom_color_palette())
 
-    p = figure(title='Acute Leukemia Methylome Atlas', width=1000, height=675,
+    p = figure(title='', width=1000, height=675,
                tools="pan,wheel_zoom,box_select,reset,save", tooltips=[(str(col), '@{' + str(col) + '}')], 
                x_axis_label=xaxis, y_axis_label=yaxis,
                active_drag="box_select", x_range=x_range, y_range=y_range)
@@ -106,14 +98,6 @@ def create_scatter_plot(df, source, col, x_range, y_range, xaxis, yaxis, test_sa
         view = CDSView(filter=GroupFilter(column_name=col, group=factor))
         p.scatter(x=xaxis, y=yaxis, source=source, view=view, 
                   color={'field': col, 'transform': color_mapper}, size=3, alpha=0.8, radius=0.2)
-
-    if test_sample:
-        for dim, loc in [('height', df.loc[test_sample][xaxis]), ('width', df.loc[test_sample][yaxis])]:
-            p.renderers.extend([Span(location=loc, dimension=dim, line_color="black", line_dash='dashed', line_alpha=0.8)])
-        p.star(x=df.loc[test_sample][xaxis], y=df.loc[test_sample][yaxis],
-               size=15, color="black", alpha=0.9, legend_label=f'Sample: {test_sample}\nPrediction: {df.loc[test_sample]["AL Epigenomic Subtype"]}',
-               line_color="black", line_width=1)
-        p.legend.click_policy = "hide"
 
     legend = Legend(items=[LegendItem(label=factor, renderers=[r]) for factor, r in zip(factors, p.renderers)],
                     location="top", click_policy="hide",

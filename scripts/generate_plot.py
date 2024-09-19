@@ -7,7 +7,7 @@ src_dir = os.path.join(os.path.dirname(current_dir), 'src')
 sys.path.append(src_dir)
 
 import pandas as pd
-from alma_plot.plot import plot_alma
+from alma_plot.plot import *
 
 def main():
 
@@ -48,7 +48,13 @@ def main():
         save_html=True
     )
 
-    print("ALMA plot generated successfully!")
+    print("ALMA plot generated!")
+
+    input_file = 'docs/index.html'
+    output_file = 'docs/index.html'
+    modify_html(input_file, output_file)
+
+    print("ALMA plot modified successfully!")
 
 if __name__ == "__main__":
     main()
