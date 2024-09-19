@@ -57,6 +57,6 @@ ENV/
 .vscode/
 .idea/
 
-# Project-specific
-data/*.csv
-docs/*.html
+# # Project-specific
+# data/*.csv
+# docs/*.html
