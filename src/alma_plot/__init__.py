@@ -1,6 +1,19 @@
-from .plot import plot_alma, create_risk_plot, create_histogram_plot, create_race_risk_plot, create_scatter_plot
+# Import main functions from plot.py
+from .plot import plot_alma
 
-__all__ = ['plot_alma', 'create_risk_plot', 'create_histogram_plot', 'create_race_risk_plot', 'create_scatter_plot']
+# Import utility functions from utils.py
+from .utils import (
+    get_custom_color_palette,
+    create_risk_plot,
+    create_histogram_plot,
+    create_scatter_plot
+)
 
-# Version of the alma_plot package
-__version__ = '0.1.0'
+# Define what should be available when using "from package import *"
+__all__ = [
+    'plot_alma',
+    'get_custom_color_palette',
+    'create_risk_plot',
+    'create_histogram_plot',
+    'create_scatter_plot'
+]
