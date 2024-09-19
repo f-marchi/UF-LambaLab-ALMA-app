@@ -10,7 +10,7 @@ import pandas as pd
 from alma_plot.plot import plot_alma
 
 def main():
-    # Load your dataset
+    # Load dataset
     df = pd.read_excel('../ALMA/data/alma_main_results.xlsx')
 
     # Define plot parameters
@@ -38,7 +38,7 @@ def main():
         x_range=x_range,
         y_range=y_range,
         cols=cols,
-        save_html=True  # Set to True if you want to save the plot as an HTML file
+        save_html=True
     )
 
     print("ALMA plot generated successfully!")
