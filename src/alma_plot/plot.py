@@ -207,7 +207,7 @@ def plot_alma(df, test_sample=None,
 
     if save_html:
         from bokeh.plotting import output_file
-        output_file("../data/ALMA.html")
+        output_file("docs/index.html")
 
     layout = column(tabs_control, histogram_plot, risk_plot, race_risk_plot)
 

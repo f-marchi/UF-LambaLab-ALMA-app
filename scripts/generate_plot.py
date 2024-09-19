@@ -10,8 +10,7 @@ import pandas as pd
 from alma_plot.plot import plot_alma
 
 def main():
-    # Load your data
-    print(f'directory: {os.getcwd()}')
+    # Load your dataset
     df = pd.read_excel('../ALMA/data/alma_main_results.xlsx')
 
     # Define plot parameters
