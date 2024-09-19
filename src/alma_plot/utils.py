@@ -7,6 +7,8 @@ from bokeh.models import (
     Label, Span, GroupFilter, CDSView, Legend, LegendItem, Tabs, TabPanel,
     CustomJS
 )
+font_size = '9pt'
+width = 1200
 
 def get_custom_color_palette():
     return [
@@ -17,7 +19,7 @@ def get_custom_color_palette():
         '#7c231e', '#3d6a3d', '#f96502', '#6d3f7d', '#6b4423', '#d956a6'
     ]
 
-def create_risk_plot(source, width, x, threshold):
+def create_risk_plot(source, x, threshold):
     p = figure(title='AML Epigenomic Risk', width=width, height=300,
                tools="xbox_select,reset,save", active_drag='xbox_select',
                x_axis_label=x, y_axis_label="Patient Percentile")
@@ -28,7 +30,7 @@ def create_risk_plot(source, width, x, threshold):
 
     for label_text, x_pos, color, align in [('High Risk', threshold + 0.01, '#ff7f0e', 'left'),
                                             ('Low Risk', threshold - 0.01, '#1f77b4', 'right')]:
-        p.add_layout(Label(y=0.05, x=x_pos, text=label_text, text_font_size='8pt',
+        p.add_layout(Label(y=0.05, x=x_pos, text=label_text, text_font_size=font_size,
                            text_color=color, text_alpha=0.8, text_align=align))
 
     scatter = p.circle(x, 'Percentile', source=source, color="steelblue", alpha=0.1, 
@@ -40,7 +42,7 @@ def create_risk_plot(source, width, x, threshold):
 
     return p
 
-def create_histogram_plot(df, source, width, x):
+def create_histogram_plot(df, source, x):
     p = figure(title='AML Epigenomic Risk - Select clusters on the map and their prognosis will appear here', 
                width=width, height=300, x_axis_label=x, y_axis_label='Frequency', tools="save,reset")
     p.toolbar.logo = None
@@ -82,7 +84,7 @@ def create_scatter_plot(df, source, col, x_range, y_range, xaxis, yaxis):
     factors = [str(val) for val in df[col].unique() if pd.notnull(val)]
     color_mapper = CategoricalColorMapper(factors=factors, palette=get_custom_color_palette())
 
-    p = figure(title='', width=1000, height=675,
+    p = figure(title='', width=width, height=810,
                tools="pan,wheel_zoom,box_select,reset,save", tooltips=[(str(col), '@{' + str(col) + '}')], 
                x_axis_label=xaxis, y_axis_label=yaxis,
                active_drag="box_select", x_range=x_range, y_range=y_range)
@@ -91,7 +93,7 @@ def create_scatter_plot(df, source, col, x_range, y_range, xaxis, yaxis):
     p.toolbar_location = 'above'
 
     for axis in [p.xaxis, p.yaxis]:
-        axis.axis_label_text_font_size = "8pt"
+        axis.axis_label_text_font_size = font_size
         axis.axis_label_text_font_style = "normal"
 
     for factor in factors:
@@ -101,7 +103,7 @@ def create_scatter_plot(df, source, col, x_range, y_range, xaxis, yaxis):
 
     legend = Legend(items=[LegendItem(label=factor, renderers=[r]) for factor, r in zip(factors, p.renderers)],
                     location="top", click_policy="hide",
-                    label_text_font_size="8pt", label_text_font_style="normal",
+                    label_text_font_size=font_size, label_text_font_style="normal",
                     glyph_height=15, glyph_width=15, spacing=1)
 
     p.add_layout(legend, 'right')

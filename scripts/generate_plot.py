@@ -28,13 +28,14 @@ def main():
     cols = [
         'AL Epigenomic Subtype',
         'WHO 2022 Diagnosis',
-        'Hematopoietic Entity',
-        'Vital Status',
+        'Vital Status at 5y',
         'AML Epigenomic Risk',
         'Risk Group AAML1831',
         'Clinical Trial',
         'Race or ethnic group',
-        'Age (group years)'
+        'Age (group years)',
+        'FLT3 ITD',
+        'FAB'
     ]
 
     # Generate the plot
