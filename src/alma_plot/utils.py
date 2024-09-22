@@ -4,9 +4,10 @@ from bokeh.layouts import column
 from bokeh.plotting import figure, show
 from bokeh.models import (
     ColumnDataSource, CategoricalColorMapper, HoverTool,
-    Label, Span, GroupFilter, CDSView, Legend, LegendItem, Tabs, TabPanel,
-    CustomJS
+    Label, GroupFilter, CDSView, Legend, LegendItem, Tabs, TabPanel,
+    CustomJS, LabelSet, Span
 )
+
 font_size = '9pt'
 width = 1200
 
@@ -18,7 +19,6 @@ def get_custom_color_palette():
         '#c7c7c7', '#ff9896', '#637939', '#aec7e8', '#ffbb78', '#98df8a',
         '#7c231e', '#3d6a3d', '#f96502', '#6d3f7d', '#6b4423', '#d956a6'
     ]
-
 def create_risk_plot(source, x, threshold):
     p = figure(title='AML Epigenomic Risk', width=width, height=300,
                tools="xbox_select,reset,save", active_drag='xbox_select',
@@ -107,5 +107,39 @@ def create_scatter_plot(df, source, col, x_range, y_range, xaxis, yaxis):
                     glyph_height=15, glyph_width=15, spacing=1)
 
     p.add_layout(legend, 'right')
+
+    # uf_hembank_df = df[df['Clinical Trial'] == "UF HemBank"].copy()
+    # first_column = df.columns[0]
+    # uf_hembank_df['label'] = uf_hembank_df[first_column].astype(str) + ': ' + uf_hembank_df['AL Epigenomic Subtype'].astype(str)
+    
+    # jitter_dict = {
+    #     'uf1829_BM': 1,
+    #     'uf1829_PB': -1,
+    #     'uf1837_PB': 0,
+    #     'uf1837_BM': -0.3,
+    #     'uf1839_PB': 0.4,
+    #     'uf1840_PB': -0.3,
+    #     'uf1842_BM': 0.6,
+    #     'uf1842_PB': -3,
+    #     'uf1852_PB': 0,
+    #     'uf1856_PB': -1.3,
+    #     'uf1856_BM': 0.5,
+    #     'uf1570_BM': -1.1
+    # }
+    
+    # uf_hembank_df['y_jittered'] = uf_hembank_df.apply(
+    #     lambda row: row[yaxis] + jitter_dict.get(row[first_column], 0), axis=1
+    # )
+    
+    # uf_hembank_source = ColumnDataSource(uf_hembank_df)
+    
+    # labels = LabelSet(x=xaxis, y='y_jittered', text='label', level='overlay',
+    #                   x_offset=1, y_offset=1, source=uf_hembank_source,
+    #                   text_font_size='9pt', 
+    #                   background_fill_color='white', background_fill_alpha=1,
+    #                   border_line_color='black', border_line_alpha=0.2,
+    #                   border_line_width=1, text_font_style='bold')
+
+    # p.add_layout(labels)
 
     return p
