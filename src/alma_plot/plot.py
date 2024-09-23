@@ -167,7 +167,7 @@ def modify_html(input_file, output_file):
     buttons = [
         ('Docs', 'https://f-marchi.github.io/ALMA/'),
         ('Contribute', 'https://github.com/f-marchi/ALMA'),
-        ('Dataset', 'https://github.com/f-marchi/ALMA/raw/refs/heads/main/data/alma_main_results.xlsx')
+        ('Paper (soon)', 'https://f-marchi.github.io/ALMA-app/')
     ]
     for text, url in buttons:
         button = soup.new_tag('a', href=url, attrs={'class': 'button'})
