@@ -13,6 +13,9 @@ def main():
 
     # Load dataset
     df = pd.read_excel('../ALMA/data/alma_main_results.xlsx')
+    
+    # Change df['AL Epigenomic Subtype'] to 'ALMA Subtype'
+    df['ALMA Subtype'] = df['AL Epigenomic Subtype']
 
     # Prognostic model samples
     df_px = df[~df['Vital Status at 5y'].isna()]
@@ -26,7 +29,7 @@ def main():
     x_range = (-45, 45)
     y_range = (-45, 45)
     cols = [
-        'AL Epigenomic Subtype',
+        'ALMA Subtype',
         'WHO 2022 Diagnosis',
         'Vital Status at 5y',
         'AML Epigenomic Risk',
