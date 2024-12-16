@@ -166,8 +166,8 @@ def modify_html(input_file, output_file):
     button_container = soup.new_tag('div', attrs={'class': 'button-container'})
     buttons = [
         ('Docs', 'https://f-marchi.github.io/ALMA/'),
-        ('Contribute', 'https://github.com/f-marchi/ALMA'),
-        ('Paper (soon)', 'https://f-marchi.github.io/ALMA-app/')
+        ('Contribute (soon)', 'https://f-marchi.github.io/ALMA/'),
+        ('Preprint', 'https://www.researchsquare.com/article/rs-5450972/latest')
     ]
     for text, url in buttons:
         button = soup.new_tag('a', href=url, attrs={'class': 'button'})
