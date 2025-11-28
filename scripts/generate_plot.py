@@ -12,7 +12,7 @@ from alma_plot.plot import *
 def main():
 
     # Load dataset
-    df = pd.read_excel('../ALMA/data/alma_main_results.xlsx')
+    df = pd.read_excel('../ALMA/data/alma_main_results_v2.xlsx')
     
     # Change df['AL Epigenomic Subtype'] to 'ALMA Subtype'
     df['ALMA Subtype'] = df['AL Epigenomic Subtype']
