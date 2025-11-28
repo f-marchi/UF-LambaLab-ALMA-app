@@ -166,8 +166,8 @@ def modify_html(input_file, output_file):
     button_container = soup.new_tag('div', attrs={'class': 'button-container'})
     buttons = [
         ('Docs', 'https://f-marchi.github.io/ALMA/'),
-        ('Contribute (soon)', 'https://f-marchi.github.io/ALMA/'),
-        ('Preprint', 'https://www.researchsquare.com/article/rs-5450972/latest')
+        ('UF Lamba Lab', 'https://lamba.pharmacy.ufl.edu/'),
+        ('Paper', 'https://doi.org/10.1038/s41467-025-62005-4')
     ]
     for text, url in buttons:
         button = soup.new_tag('a', href=url, attrs={'class': 'button'})
@@ -177,7 +177,7 @@ def modify_html(input_file, output_file):
 
     # Add the copyright footnote
     footer = soup.new_tag('div', attrs={'class': 'footer'})
-    footer.string = "Marchi et al. | Lamba Lab | University of Florida | © Copyright 2024"
+    footer.string = "Marchi et al. | University of Florida | © Copyright 2025"
     container_div.append(footer)
 
     # Update the JavaScript to use the new plot-container id
